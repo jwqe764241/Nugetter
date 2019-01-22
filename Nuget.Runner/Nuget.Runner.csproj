@@ -47,13 +47,13 @@
   <ItemGroup>
     <Compile Include="Indexer\Index.cs" />
     <Compile Include="Indexer\Indexer.cs" />
-    <Compile Include="Operation\Download.cs" />
-    <Compile Include="Operation\Manifest.cs" />
-    <Compile Include="Operation\ManifestResult.cs" />
-    <Compile Include="Operation\Search.cs" />
-    <Compile Include="Operation\SearchOption.cs" />
-    <Compile Include="Operation\SearchResult.cs" />
-    <Compile Include="Operation\SingleValueArrayConverter.cs" />
+    <Compile Include="Download\Download.cs" />
+    <Compile Include="Manifest\Manifest.cs" />
+    <Compile Include="Manifest\ManifestResult.cs" />
+    <Compile Include="Search\Search.cs" />
+    <Compile Include="Search\SearchOption.cs" />
+    <Compile Include="Search\SearchResult.cs" />
+    <Compile Include="Utils\SingleValueArrayConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

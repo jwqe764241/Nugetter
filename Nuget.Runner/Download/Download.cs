@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 
-namespace Runner.Operation
+namespace Runner.Download
 {
 	public static class Download
 	{

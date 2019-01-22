@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Runner.Operation
+namespace Runner.Search
 {
     public class SearchResult
 	{

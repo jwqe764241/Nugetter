@@ -9,7 +9,7 @@ using System.Xml.XPath;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 
-namespace Runner.Operation
+namespace Runner.Manifest
 {
     public static class Manifest
 	{
