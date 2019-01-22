@@ -74,7 +74,7 @@ namespace Runner.Search
 		public string[] Tags { get; set; }
 
 		[JsonProperty]
-		public string[] authors { get; set; }
+		public string[] Authors { get; set; }
 
 		[JsonProperty]
 		public int TotalDownloads { get; set; }

@@ -17,7 +17,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox IsChecked="{Binding Selected}"/>
+                        <CheckBox Style="{x:Null}" IsChecked="{Binding Selected}"/>
                         <StackPanel Margin="30, 0, 0, 0">
                             <TextBlock Text="{Binding Name}" />
                             <TextBlock Text="{Binding Url}" />

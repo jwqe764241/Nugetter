@@ -4,12 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NugetDownloader.View"
+             xmlns:convert="clr-namespace:NugetDownloader.Converter" 
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="810">
-    <DockPanel LastChildFill="True" Background="White">
-        <StackPanel x:Name="list" DockPanel.Dock="Left" Width="510">
-            <ListBox Height="550" BorderThickness="1" BorderBrush="#FFB0B0B0" Margin="5"/>
+    <DockPanel LastChildFill="True" Background="White" >
+        <StackPanel x:Name="list" DockPanel.Dock="Left" Width="510" Margin="5">
+            <Grid Margin="0, 0, 0, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
 
+                <TextBox Style="{x:Null}" Grid.Column="0"/>
+                <Label FontSize="12" HorizontalAlignment="Center" Content="Package Source" Grid.Column="1"/>
+                <ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="2" Margin="2, 0 2, 0"/>
+            </Grid>
+
+            <ListBox Height="519" BorderThickness="1" BorderBrush="#FFB0B0B0" ItemsSource="{Binding SearchList,Mode=OneWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="{Binding IconUrl}" RenderOptions.BitmapScalingMode="Fant"/>
+                            <StackPanel Grid.Column="1" Margin="5, 0, 0, 0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="0" Content="{Binding _Id}"/>
+                                    <Label FontSize="12" HorizontalAlignment="Left" Grid.Column="1" >
+                                        <AccessText TextWrapping="WrapWithOverflow" Text="{Binding Authors, Converter={convert:AuthorConverter}}" TextTrimming="CharacterEllipsis"></AccessText>
+                                    </Label>
+                                    <Label FontSize="12" Grid.Column="2" HorizontalAlignment="Right" Content="{Binding Version}"/>
+                                </Grid>
+                                
+                                <Label HorizontalAlignment="Left" Height="50">
+                                    <AccessText TextWrapping="WrapWithOverflow" Text="{Binding Description}" TextTrimming="CharacterEllipsis"></AccessText>
+                                </Label>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
 
         <Border BorderBrush="LightGray" BorderThickness="2, 0, 0, 0">
@@ -60,8 +104,8 @@
                     <Label FontSize="13" HorizontalAlignment="Left" Grid.Row="0">
                         <Bold>Description</Bold>
                     </Label>
-                    <Label HorizontalAlignment="Center" Grid.Row="1">
-                        <AccessText TextWrapping="WrapWithOverflow">_Another long piece of text that requires text wrappinggoes here.</AccessText>
+                    <Label HorizontalAlignment="Left" Grid.Row="1" Margin="10, 0, 0, 0">
+                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
                     </Label>
                 </Grid>
 
@@ -88,7 +132,7 @@
                     </Label>
                     
                     <Label HorizontalAlignment="Left" Grid.Column="1">
-                        <AccessText TextWrapping="WrapWithOverflow">_Another long piece of text that requires text wrappinggoes here.</AccessText>
+                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
                     </Label>
                 </Grid>
 
@@ -139,7 +183,7 @@
                     </Label>
 
                     <Label HorizontalAlignment="Left" Grid.Column="1">
-                        <AccessText TextWrapping="WrapWithOverflow">_Another long piece of text that requires text wrappinggoes here.</AccessText>
+                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
                     </Label>
                 </Grid>
 
@@ -152,8 +196,8 @@
                     <Label FontSize="13" HorizontalAlignment="Left" Grid.Row="0">
                         <Bold>Dependencies</Bold>
                     </Label>
-                    <Label HorizontalAlignment="Center" Grid.Row="1">
-                        <AccessText TextWrapping="WrapWithOverflow">_Another long piece of text that requires text wrappinggoes here.</AccessText>
+                    <Label HorizontalAlignment="Left" Grid.Row="1" Margin="10, 0, 0, 0">
+                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
                     </Label>
                 </Grid>
             </StackPanel>
