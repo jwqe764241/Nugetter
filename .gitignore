@@ -374,5 +374,5 @@ $RECYCLE.BIN/
 
 
 #project for test
-./Sandbox
+Sandbox/
 ./Sandbox/*
