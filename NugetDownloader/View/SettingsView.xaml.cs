@@ -21,7 +21,6 @@ namespace NugetDownloader.View
 		public SettingsView()
 		{
 			InitializeComponent();
-			this.DataContext = new SettingsViewModel();
 		}
 	}
 }

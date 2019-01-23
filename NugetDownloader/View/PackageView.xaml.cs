@@ -21,7 +21,6 @@ namespace NugetDownloader.View
 		public PackageView()
 		{
 			InitializeComponent();
-			this.DataContext = new PackageViewModel();
-		}
+        }
 	}
 }
