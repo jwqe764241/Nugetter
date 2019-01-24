@@ -29,8 +29,11 @@ namespace Runner.Manifest
 		public bool RequireLicenseAcceptance { get; set; }
 
 		[JsonProperty]
-		public string LicenseUrl { get; set; }
+		public string IconUrl { get; set; }
 
+		[JsonProperty]
+		public string LicenseUrl { get; set; }
+		
 		[JsonProperty]
 		public string ProjectUrl { get; set; }
 

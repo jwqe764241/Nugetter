@@ -88,6 +88,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -110,6 +113,9 @@
     </ApplicationDefinition>
     <Compile Include="Converter\AuthorConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="Converter\DependencyConverter.cs" />
+    <Compile Include="Converter\TagConverter.cs" />
+    <Compile Include="Converter\VersionConverter.cs" />
     <Compile Include="Utils\BaseCommand.cs" />
     <Compile Include="ViewModel\PackageViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />

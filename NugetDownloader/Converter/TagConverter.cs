@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Windows.Data;
+using System.Windows.Markup;
+
+namespace NugetDownloader.Converter
+{
+	public class TagConverter : MarkupExtension, IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			//TODO:정렬 후 ", " 형태로 바꿀것
+			var tags = (string) value;
+			if(tags != null)
+			{
+				return tags.Replace(" ", ", ");
+			}
+
+			return "No tags";
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			return this;
+		}
+	}
+}

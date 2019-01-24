@@ -3,204 +3,215 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:NugetDownloader.View"
              xmlns:convert="clr-namespace:NugetDownloader.Converter" 
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="810">
-    <DockPanel LastChildFill="True" Background="White" >
-        <StackPanel x:Name="list" DockPanel.Dock="Left" Width="510" Margin="5">
-            <Grid Margin="0, 0, 0, 5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="70"/>
-                </Grid.ColumnDefinitions>
+	<DockPanel LastChildFill="True" Background="White" >
+		<StackPanel x:Name="list" DockPanel.Dock="Left" Width="510" Margin="5">
+			<Grid Margin="0, 0, 0, 5">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="100"/>
+					<ColumnDefinition Width="70"/>
+				</Grid.ColumnDefinitions>
 
-                <TextBox Style="{x:Null}" Grid.Column="0"/>
-                <Label FontSize="12" HorizontalAlignment="Center" Content="Package Source" Grid.Column="1"/>
-                <ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="2" Margin="2, 0 2, 0"/>
-            </Grid>
+				<TextBox Style="{x:Null}" Grid.Column="0"/>
+				<Label FontSize="12" HorizontalAlignment="Center" Content="Package Source" Grid.Column="1"/>
+				<ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="2" Margin="2, 0 2, 0"/>
+			</Grid>
 
-            <ListBox Name="PackageList" Height="519" BorderThickness="1" BorderBrush="#FFB0B0B0" ItemsSource="{Binding SearchList}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+			<ListBox Name="PackageList" Height="519" BorderThickness="1" BorderBrush="#FFB0B0B0" ItemsSource="{Binding SearchList}" SelectedItem="{Binding SelectedItem}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="MouseUp">
+						<i:InvokeCommandAction Command="{Binding ItemClickCommand}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="40"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
 
 							<Image Grid.Column="0" Source="{Binding IconUrl, Converter={convert:IconConverter}}" RenderOptions.BitmapScalingMode="Fant"/>
-                            <StackPanel Grid.Column="1" Margin="5, 0, 0, 0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
+							<StackPanel Grid.Column="1" Margin="5, 0, 0, 0">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="auto"/>
+										<ColumnDefinition Width="auto"/>
+										<ColumnDefinition Width="100"/>
+									</Grid.ColumnDefinitions>
 
-                                    <Label FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="0" Content="{Binding _Id}"/>
-                                    <Label FontSize="12" HorizontalAlignment="Left" Grid.Column="1" >
-                                        <AccessText TextWrapping="WrapWithOverflow" Text="{Binding Authors, Converter={convert:AuthorConverter}}" TextTrimming="CharacterEllipsis"></AccessText>
-                                    </Label>
-                                    <Label FontSize="12" Grid.Column="2" HorizontalAlignment="Right" Content="{Binding Version}"/>
-                                </Grid>
-                                
-                                <Label HorizontalAlignment="Left" Height="50">
-                                    <AccessText TextWrapping="WrapWithOverflow" Text="{Binding Description}" TextTrimming="CharacterEllipsis"></AccessText>
-                                </Label>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+									<Label FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="0" Content="{Binding _Id}"/>
+									<Label FontSize="12" HorizontalAlignment="Left" Grid.Column="1" >
+										<AccessText TextWrapping="WrapWithOverflow" Text="{Binding Authors, Converter={convert:AuthorConverter}}" TextTrimming="CharacterEllipsis"/>
+									</Label>
+									<Label FontSize="12" Grid.Column="2" HorizontalAlignment="Right" Content="{Binding Version}"/>
+								</Grid>
 
-        <Border BorderBrush="LightGray" BorderThickness="2, 0, 0, 0">
-            <StackPanel Margin="5, 0, 5, 0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="52"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Width="32" Height="32" Margin="0, 10, 0 0" HorizontalAlignment="Left" Grid.Column="0"/>
-                    <Label FontSize="14" HorizontalAlignment="Left" Grid.Column="1" Margin="0, 10, 0, 0"/>
-                </Grid>
+								<Label HorizontalAlignment="Left" Height="50">
+									<AccessText TextWrapping="WrapWithOverflow" Text="{Binding Description}" TextTrimming="CharacterEllipsis"/>
+								</Label>
+							</StackPanel>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+		<Border BorderBrush="LightGray" BorderThickness="2, 0, 0, 0">
+			<ScrollViewer>
+				<StackPanel Margin="5, 0, 0, 0" DataContext="{Binding SelectedItemManifest}">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="52"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Image Width="32" Height="32" RenderOptions.BitmapScalingMode="HighQuality" Margin="0, 10, 0 0" HorizontalAlignment="Left" Grid.Column="0" Source="{Binding IconUrl, Converter={convert:IconConverter}}" VerticalAlignment="Top"/>
+						<Label FontSize="14" HorizontalAlignment="Left" Grid.Column="1" Margin="0, 10, 0, 0" Content="{Binding Id}"/>
+					</Grid>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Version:</Bold>
-                    </Label>
-                    <ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-                    <Button Height="22" VerticalAlignment="Center" Content="Install" Style="{x:Null}" Grid.Column="2" Margin="2, 0 2, 0"></Button>
-                </Grid>
-                
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="100"/>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Runtime Rule:</Bold>
-                    </Label>
-                    <ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-                </Grid>
-                
-                <Separator/>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
+							<Bold>Version:</Bold>
+						</Label>
+						<ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0" 
+								  ItemsSource="{Binding DataContext.SelectedItem.Versions, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={convert:VersionConverter}}" SelectedIndex="0"/>
+						<Button Height="22" VerticalAlignment="Center" Content="Install" Style="{x:Null}" Grid.Column="2" Margin="2, 0 2, 0"></Button>
+					</Grid>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+					<!--
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="100"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Row="0">
-                        <Bold>Description</Bold>
-                    </Label>
-                    <Label HorizontalAlignment="Left" Grid.Row="1" Margin="10, 0, 0, 0">
-                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
-                    </Label>
-                </Grid>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
+							<Bold>Runtime Rule:</Bold>
+						</Label>
+						<ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
+					</Grid>
+					-->
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+					<Separator Margin="0, 10, 0, 0"/>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Version:</Bold>
-                    </Label>
-                    <Label Style="{x:Null}" FontSize="13" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-                </Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+						</Grid.RowDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Row="0" FontWeight="Bold" Content="Description"/>
+						<Label HorizontalAlignment="Left" Grid.Row="1" Margin="10, 0, 0, 0">
+							<AccessText TextWrapping="WrapWithOverflow" Text="{Binding Description}"/>
+						</Label>
+					</Grid>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Autors(s):</Bold>
-                    </Label>
-                    
-                    <Label HorizontalAlignment="Left" Grid.Column="1">
-                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
-                    </Label>
-                </Grid>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="60"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0" FontWeight="Bold" Content="Version"/>
+						<Label Style="{x:Null}" FontSize="13" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0" Content="{Binding Version}"/>
+					</Grid>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>License:</Bold>
-                    </Label>
-                    <Label Style="{x:Null}" FontSize="13" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-                </Grid>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="70"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="110"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0" FontWeight="Bold" Content="Autors(s):"/>
+						<Label HorizontalAlignment="Left" Grid.Column="1">
+							<AccessText TextWrapping="WrapWithOverflow" Text="{Binding Authors}"/>
+						</Label>
+					</Grid>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Date Published: </Bold>
-                    </Label>
-                    <Label Style="{x:Null}" FontSize="12" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-                </Grid>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="60"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="110"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
+							<Bold>License:</Bold>
+						</Label>
+						<TextBlock Style="{x:Null}" FontSize="13" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0">
+						<Hyperlink NavigateUri="{Binding LicenseUrl}">
+							See License
+						</Hyperlink>
+						</TextBlock>
+					</Grid>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Project URL:</Bold>
-                    </Label>
-                    <Label Style="{x:Null}" FontSize="12" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-                </Grid>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="110"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="45"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
+							<Bold>Date Published:</Bold>
+						</Label>
+						<Label Style="{x:Null}" FontSize="12" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
+					</Grid>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-                        <Bold>Tags:</Bold>
-                    </Label>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="90"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                    <Label HorizontalAlignment="Left" Grid.Column="1">
-                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
-                    </Label>
-                </Grid>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0" FontWeight="Bold" Content="Project URL:"/>
+						<TextBlock Style="{x:Null}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="2, 0 2, 0">
+						<Hyperlink NavigateUri="{Binding ProjectUrl}">
+							<AccessText TextWrapping="WrapWithOverflow" Text="{Binding ProjectUrl}"/>
+						</Hyperlink>
+						</TextBlock>
+					</Grid>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="45"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
 
-                    <Label FontSize="13" HorizontalAlignment="Left" Grid.Row="0">
-                        <Bold>Dependencies</Bold>
-                    </Label>
-                    <Label HorizontalAlignment="Left" Grid.Row="1" Margin="10, 0, 0, 0">
-                        <AccessText TextWrapping="WrapWithOverflow"></AccessText>
-                    </Label>
-                </Grid>
-            </StackPanel>
-        </Border>
-    </DockPanel>
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0" FontWeight="Bold" Content="Tags: "/>
+
+						<Label HorizontalAlignment="Left" Grid.Column="1">
+							<AccessText TextWrapping="WrapWithOverflow" Text="{Binding Tags, Converter={convert:TagConverter}}"/>
+						</Label>
+					</Grid>
+
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="30*"/>
+							<ColumnDefinition Width="103*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+						</Grid.RowDefinitions>
+
+						<Label FontSize="13" HorizontalAlignment="Left" Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" Content="Dependency: "/>
+						<Label HorizontalAlignment="Left" Grid.Row="1" Margin="10, 0, 0, 0">
+							<AccessText TextWrapping="WrapWithOverflow" Text="{Binding Dependencies, Converter={convert:DependencyConverter}}"></AccessText>
+						</Label>
+					</Grid>
+				</StackPanel>
+			</ScrollViewer>
+		</Border>
+	</DockPanel>
 </UserControl>
