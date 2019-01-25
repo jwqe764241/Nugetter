@@ -9,7 +9,7 @@ using System.Windows.Data;
 using System.Threading;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
+using System.Windows.Controls;
 using NugetDownloader.Utils;
 
 /*
@@ -46,23 +46,29 @@ namespace NugetDownloader.ViewModel
 		private BackgroundWorker SearchWorker { get; set; }
 		private BackgroundWorker ManifestWorker { get; set; }
 
+		private SearchOption SearchOption { get; set; }
+
 
 		public ICommand ItemClickCommand { get; set; }
 		public ICommand ShowLicenseCommand { get; set; }
+		public ICommand ListScrollCommand { get; set; }
 
         public PackageViewModel()
         {
             Indexer = new Indexer("https://api.nuget.org/v3/index.json");
             searchList = new ObservableCollection<MetaData>();
-            
-            SearchWorker = new BackgroundWorker
+
+			ItemClickCommand = new BaseCommand(ItemClicked);
+			ShowLicenseCommand = new BaseCommand(LicenseClicked);
+			ListScrollCommand = new BaseCommand(ListScrolled);
+
+			SearchWorker = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
             SearchWorker.DoWork += SearchWork;
             SearchWorker.RunWorkerCompleted += SearchWorkCompleted;
-            SearchPackage("");
 
 			ManifestWorker = new BackgroundWorker
 			{
@@ -72,27 +78,27 @@ namespace NugetDownloader.ViewModel
 			ManifestWorker.DoWork += ManifestWork;
 			ManifestWorker.RunWorkerCompleted += ManifestWorkCompleted;
 
-			ItemClickCommand = new BaseCommand(ItemClicked);
+			SearchOption = new SearchOption()
+			{
+				q = "",
+				take = 20
+			};
+
+			SearchWorker.RunWorkerAsync(SearchOption);
 		}
 
-        public void SearchPackage(string query)
+        public void SearchPackage(SearchOption option)
         {
             if (!SearchWorker.IsBusy)
             {
-                SearchWorker.RunWorkerAsync(query);
+                SearchWorker.RunWorkerAsync(option);
             }
         }
         private void SearchWork(object sender, DoWorkEventArgs e)
         {
-            string query = (string)e.Argument;
-
-            SearchOption options = new SearchOption()
-            {
-                q = query,
-                take = 20
-            };
-
-            var result = Search.Run(Indexer.GetResource(Search.RequiredType).First().Id, options);
+			SearchOption options = (SearchOption)e.Argument;
+				
+			var result = Search.Run(Indexer.GetResource(Search.RequiredType).First().Id, options);
             e.Result = result;
         }
         private void SearchWorkCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -110,7 +116,9 @@ namespace NugetDownloader.ViewModel
                 var result = (SearchResult)e.Result;
                 
                 foreach(var item in result.Data)
-                    SearchList.Add(item);
+				{
+					SearchList.Add(item);
+				}
 
                 OnPropertyChanged("SearchList");
             }
@@ -144,14 +152,28 @@ namespace NugetDownloader.ViewModel
 		}
 
 
-		private void ItemClicked(object value)
+		private void ItemClicked(object param)
 		{
 			GetManifest();
 		}
 		
-		private void ShowLicenseClicked(object value)
+		private void LicenseClicked(object param)
 		{
 
+		}
+
+		private void ListScrolled(object param)
+		{
+			ScrollChangedEventArgs args = param as ScrollChangedEventArgs;
+			
+			ScrollViewer scroll = (ScrollViewer) args.OriginalSource;
+
+
+			if(scroll.ScrollableHeight == scroll.VerticalOffset)
+			{
+				SearchOption.skip = SearchList.Count;
+				SearchPackage(SearchOption);
+			}
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

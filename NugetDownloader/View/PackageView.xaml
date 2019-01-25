@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:NugetDownloader.View"
-             xmlns:convert="clr-namespace:NugetDownloader.Converter" 
+             xmlns:convert="clr-namespace:NugetDownloader.Converter"
+			 xmlns:trigger="clr-namespace:NugetDownloader.Event"
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="810">
 	<DockPanel LastChildFill="True" Background="White" >
@@ -27,6 +28,10 @@
 					<i:EventTrigger EventName="MouseUp">
 						<i:InvokeCommandAction Command="{Binding ItemClickCommand}"/>
 					</i:EventTrigger>
+
+					<trigger:RoutedEventTrigger RoutedEvent="ScrollViewer.ScrollChanged">
+						<trigger:CommandAction Command="{Binding ListScrollCommand}"/>
+					</trigger:RoutedEventTrigger>
 				</i:Interaction.Triggers>
 
 				<ListBox.ItemTemplate>
@@ -175,10 +180,10 @@
 						</Grid.ColumnDefinitions>
 
 						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0" FontWeight="Bold" Content="Project URL:"/>
-						<TextBlock Style="{x:Null}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="2, 0 2, 0">
-						<Hyperlink NavigateUri="{Binding ProjectUrl}">
-							<AccessText TextWrapping="WrapWithOverflow" Text="{Binding ProjectUrl}"/>
-						</Hyperlink>
+						<TextBlock Style="{x:Null}" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Margin="2, 0 2, 0">
+							<Hyperlink NavigateUri="{Binding ProjectUrl}">
+								<AccessText TextWrapping="WrapWithOverflow" Text="{Binding ProjectUrl}"/>
+							</Hyperlink>
 						</TextBlock>
 					</Grid>
 

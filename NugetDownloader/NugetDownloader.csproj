@@ -116,7 +116,9 @@
     <Compile Include="Converter\DependencyConverter.cs" />
     <Compile Include="Converter\TagConverter.cs" />
     <Compile Include="Converter\VersionConverter.cs" />
-    <Compile Include="Utils\BaseCommand.cs" />
+    <Compile Include="Event\CommandAction.cs" />
+    <Compile Include="Event\RoutedEventTrigger.cs" />
+    <Compile Include="Event\BaseCommand.cs" />
     <Compile Include="ViewModel\PackageViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\PackageView.xaml.cs">
