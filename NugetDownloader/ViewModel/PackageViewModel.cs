@@ -103,7 +103,7 @@ namespace NugetDownloader.ViewModel
             }
             else if(e.Error != null)
             {
-                MessageBox.Show("Error : " + e.Error);
+				MessageBox.Show("Error : " + e.Error);
             }
             else
             {
@@ -130,6 +130,7 @@ namespace NugetDownloader.ViewModel
 			if(meta == null)
 			{
 				SearchWorker.CancelAsync();
+				return;
 			}
 
 			var result = Manifest.Run(Indexer.GetResource(Manifest.RequiredType).First().Id, meta._Id, meta.Version);
@@ -147,7 +148,7 @@ namespace NugetDownloader.ViewModel
 		{
 			GetManifest();
 		}
-
+		
 		private void ShowLicenseClicked(object value)
 		{
 
