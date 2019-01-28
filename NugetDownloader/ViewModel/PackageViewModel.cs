@@ -36,6 +36,19 @@ namespace NugetDownloader.ViewModel
 				OnPropertyChanged("SearchList");
 			}
 		}
+		public string searchKeyword;
+		public string SearchKeyword
+		{
+			get
+			{
+				return searchKeyword;
+			}
+			set
+			{
+				searchKeyword = value;
+				OnPropertyChanged("SearchKeyword");
+			}
+		}
 		public Indexer Indexer { get; set; }
 		public MetaData SelectedItem { get; set; }
 		public ManifestResult SelectedItemManifest { get; set; }
@@ -52,15 +65,19 @@ namespace NugetDownloader.ViewModel
 		public ICommand ItemClickCommand { get; set; }
 		public ICommand ShowLicenseCommand { get; set; }
 		public ICommand ListScrollCommand { get; set; }
+		public ICommand SearchCommand { get; set; }
 
         public PackageViewModel()
         {
             Indexer = new Indexer("https://api.nuget.org/v3/index.json");
             searchList = new ObservableCollection<MetaData>();
+			searchKeyword = "";
+
 
 			ItemClickCommand = new BaseCommand(ItemClicked);
 			ShowLicenseCommand = new BaseCommand(LicenseClicked);
 			ListScrollCommand = new BaseCommand(ListScrolled);
+			SearchCommand = new BaseCommand(InputEnterDown);
 
 			SearchWorker = new BackgroundWorker
             {
@@ -80,7 +97,7 @@ namespace NugetDownloader.ViewModel
 
 			SearchOption = new SearchOption()
 			{
-				q = "",
+				q = searchKeyword,
 				take = 20
 			};
 
@@ -167,13 +184,20 @@ namespace NugetDownloader.ViewModel
 			ScrollChangedEventArgs args = param as ScrollChangedEventArgs;
 			
 			ScrollViewer scroll = (ScrollViewer) args.OriginalSource;
-
-
+			
 			if(scroll.ScrollableHeight == scroll.VerticalOffset)
 			{
 				SearchOption.skip = SearchList.Count;
 				SearchPackage(SearchOption);
 			}
+		}
+
+		private void InputEnterDown(object param)
+		{
+			SearchList.Clear();
+
+			SearchOption.q = SearchKeyword;
+			SearchPackage(SearchOption);
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -18,7 +18,11 @@
 					<ColumnDefinition Width="70"/>
 				</Grid.ColumnDefinitions>
 
-				<TextBox Style="{x:Null}" Grid.Column="0"/>
+				<TextBox Style="{x:Null}" Grid.Column="0" Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}">
+					<TextBox.InputBindings>
+						<KeyBinding Gesture="Enter" Command="{Binding SearchCommand}"/>
+					</TextBox.InputBindings>
+				</TextBox>
 				<Label FontSize="12" HorizontalAlignment="Center" Content="Package Source" Grid.Column="1"/>
 				<ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="2" Margin="2, 0 2, 0"/>
 			</Grid>
@@ -94,20 +98,6 @@
 								  ItemsSource="{Binding DataContext.SelectedItem.Versions, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={convert:VersionConverter}}" SelectedIndex="0"/>
 						<Button Height="22" VerticalAlignment="Center" Content="Install" Style="{x:Null}" Grid.Column="2" Margin="2, 0 2, 0"></Button>
 					</Grid>
-
-					<!--
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="100"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-
-						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0">
-							<Bold>Runtime Rule:</Bold>
-						</Label>
-						<ComboBox Style="{x:Null}" VerticalAlignment="Center" Grid.Column="1" Margin="2, 0 2, 0"/>
-					</Grid>
-					-->
 
 					<Separator Margin="0, 10, 0, 0"/>
 
