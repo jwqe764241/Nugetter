@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using System.Windows.Data;
 using System.Globalization;
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
+using System.Drawing;
 
 using System.Windows;
 
@@ -17,9 +20,15 @@ namespace NugetDownloader.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if(value == null)
-            {
-                return Properties.Resources.nuget_package_logo;
-            }
+			{
+				var bmp = Properties.Resources.nuget_package_logo;
+
+				return Imaging.CreateBitmapSourceFromHBitmap(
+					bmp.GetHbitmap(),
+					IntPtr.Zero,
+					Int32Rect.Empty,
+					BitmapSizeOptions.FromEmptyOptions());
+			}
 
             return value;
         }
