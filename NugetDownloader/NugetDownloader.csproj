@@ -119,6 +119,7 @@
     <Compile Include="Event\CommandAction.cs" />
     <Compile Include="Event\RoutedEventTrigger.cs" />
     <Compile Include="Event\BaseCommand.cs" />
+    <Compile Include="Model\DownloadArgument.cs" />
     <Compile Include="ViewModel\PackageViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\PackageView.xaml.cs">
@@ -180,9 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\nuget-package-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Icon1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

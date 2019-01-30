@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace NugetDownloader.Utils
+namespace NugetDownloader.Event
 {
 	public class BaseCommand : ICommand
 	{

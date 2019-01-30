@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 
 using NugetDownloader.Model;
-using NugetDownloader.Utils;
+using NugetDownloader.Event;
 
 namespace NugetDownloader.ViewModel
 {
