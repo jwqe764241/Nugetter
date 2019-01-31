@@ -21,22 +21,28 @@ namespace NugetDownloader.ViewModel
 			}
 		}
 
+		private SettingsViewModel _SettingsViewModel { get; set; }
+		private PackageViewModel _PackageViewModel { get; set; } 
+
 		public MainViewModel()
 		{
 			SettingsCommand = new BaseCommand(OpenSettings);
 			PackageCommand = new BaseCommand(OpenPackage);
 
-			SelectedViewModel = new SettingsViewModel();
+			_SettingsViewModel = new SettingsViewModel();
+			_PackageViewModel = new PackageViewModel();
+
+			SelectedViewModel = _SettingsViewModel;
 		}
 
 		private void OpenSettings(object obj)
 		{
-			SelectedViewModel = new SettingsViewModel();
+			SelectedViewModel = _SettingsViewModel;
 		}
 
 		private void OpenPackage(object obj)
 		{
-			SelectedViewModel = new PackageViewModel();
+			SelectedViewModel = _PackageViewModel;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
