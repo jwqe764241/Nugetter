@@ -5,7 +5,7 @@ using NugetDownloader.Event;
 
 namespace NugetDownloader.ViewModel
 {
-	class MainViewModel : INotifyPropertyChanged
+	class MainViewModel : BaseViewModel
 	{
 		public ICommand SettingsCommand { get; set; }
 		public ICommand PackageCommand { get; set; }
@@ -43,12 +43,6 @@ namespace NugetDownloader.ViewModel
 		private void OpenPackage(object obj)
 		{
 			SelectedViewModel = _PackageViewModel;
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

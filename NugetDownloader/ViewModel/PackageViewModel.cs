@@ -22,7 +22,7 @@ using Runner.Download;
 
 namespace NugetDownloader.ViewModel
 {
-	class PackageViewModel : INotifyPropertyChanged
+	class PackageViewModel : BaseViewModel
 	{
 		//delete this later and add 
 		private const string DownloadLocation = @"C:\NugetDownloader\downloads\";
@@ -256,12 +256,6 @@ namespace NugetDownloader.ViewModel
 			string version = SelectedVersion;
 
 			DownloadPackage(id, version);
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

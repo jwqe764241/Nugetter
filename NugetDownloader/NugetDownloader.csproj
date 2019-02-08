@@ -120,6 +120,7 @@
     <Compile Include="Event\RoutedEventTrigger.cs" />
     <Compile Include="Event\BaseCommand.cs" />
     <Compile Include="Model\DownloadArgument.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\PackageView.xaml.cs">

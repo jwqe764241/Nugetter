@@ -11,7 +11,7 @@ using NugetDownloader.Event;
 
 namespace NugetDownloader.ViewModel
 {
-    class SettingsViewModel : INotifyPropertyChanged
+    class SettingsViewModel : BaseViewModel
     {
 		private List<Source> defaultSources;
         private List<Source> userDefinedSources;
@@ -46,11 +46,5 @@ namespace NugetDownloader.ViewModel
             userDefinedSources.Add(source);
             OnPropertyChanged("UserDefinedSources");
         }
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
     }
 }
