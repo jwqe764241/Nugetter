@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetDownloader", "NugetDow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuget.Runner", "Nuget.Runner\Nuget.Runner.csproj", "{899B1CF1-F1E1-4C89-988E-8A13DAFBDEDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{C4AAE8A8-D9A4-4357-86B1-C5E04B907892}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{899B1CF1-F1E1-4C89-988E-8A13DAFBDEDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{899B1CF1-F1E1-4C89-988E-8A13DAFBDEDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{899B1CF1-F1E1-4C89-988E-8A13DAFBDEDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4AAE8A8-D9A4-4357-86B1-C5E04B907892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4AAE8A8-D9A4-4357-86B1-C5E04B907892}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4AAE8A8-D9A4-4357-86B1-C5E04B907892}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4AAE8A8-D9A4-4357-86B1-C5E04B907892}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
