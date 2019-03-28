@@ -45,44 +45,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NuGet.Commands">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Commands.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Common">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Configuration">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Credentials">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Credentials.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.DependencyResolver.Core">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.DependencyResolver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Frameworks">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Frameworks.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.LibraryModel">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.LibraryModel.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Packaging">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Packaging.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Packaging.Core">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Packaging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.ProjectModel">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.ProjectModel.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Protocol">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Protocol.dll</HintPath>
-    </Reference>
     <Reference Include="Nuget.Runner">
-      <HintPath>..\Nuget.Runner\bin\Release\Nuget.Runner.dll</HintPath>
-    </Reference>
-    <Reference Include="NuGet.Versioning">
-      <HintPath>F:\NuGet.Client\artifacts\Microsoft.Build.NuGetSdkResolver\15.0\bin\Debug\net472\NuGet.Versioning.dll</HintPath>
+      <HintPath>..\Nuget.Runner\bin\Debug\Nuget.Runner.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
