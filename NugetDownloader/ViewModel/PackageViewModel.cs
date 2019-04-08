@@ -5,6 +5,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.IO.Compression;
 
 using NugetDownloader.Event;
 using NugetDownloader.Model;
@@ -197,7 +198,10 @@ namespace NugetDownloader.ViewModel
 
 			var packageBinary = Download.Run(Indexer.GetResource(Download.RequiredType).First().Id, argument.Id, argument.Version);
 
-			FileInfo fileInfo = new FileInfo(DownloadLocation + argument.Id + "\\" + argument.Version + "\\" + argument.Id + "." + argument.Version + ".nupkg");
+			string packagePath = DownloadLocation + argument.Id + "\\" + argument.Version + "\\" + argument.Id + "." + argument.Version + ".nupkg";
+			string decompressPath = DownloadLocation + argument.Id + "\\" + argument.Version + "\\";
+
+			FileInfo fileInfo = new FileInfo(packagePath);
 			if(!fileInfo.Exists)
 			{
 				Directory.CreateDirectory(fileInfo.Directory.FullName);
@@ -206,6 +210,26 @@ namespace NugetDownloader.ViewModel
 			var stream = fileInfo.Create();
 			stream.Write(packageBinary, 0, packageBinary.Length);
 			stream.Close();
+
+			//nupkg 안에 lib 폴더만 압축해제
+			using (ZipArchive archive = ZipFile.OpenRead(packagePath))
+			{
+				var result = from currentEntry in archive.Entries
+							 where currentEntry.FullName.StartsWith("lib/")
+							 select currentEntry;
+
+				foreach (ZipArchiveEntry entry in result)
+				{
+					string path = Path.Combine(decompressPath, entry.FullName);
+
+					if (!Directory.Exists(Path.GetDirectoryName(path)))
+					{
+						Directory.CreateDirectory(Path.GetDirectoryName(path));
+					}
+
+					entry.ExtractToFile(path);
+				}
+			}
 
 			e.Result = argument;
 		}
