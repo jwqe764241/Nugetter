@@ -23,7 +23,6 @@ namespace Runner.Utils
 				T instance = (T)serializer.Deserialize(reader, typeof(T));
 				retVal = new List<T>() { instance };
 			}
-
 			else if (reader.TokenType == JsonToken.StartArray)
 			{
 				retVal = serializer.Deserialize(reader, objectType);
