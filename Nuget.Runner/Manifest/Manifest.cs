@@ -13,7 +13,6 @@ namespace Runner.Manifest
 {
     public static class Manifest
 	{
-
 		public static string RequiredType
 		{
 			get { return "PackageBaseAddress"; }

@@ -24,7 +24,6 @@ namespace Runner.Search
 				httpClient.GetStringAsync(GetUrl(id, option)).Result);
 		}
 		
-
 		private static string GetUrl(string id, SearchOption option)
 		{
 			StringBuilder builder = new StringBuilder(id + "?");

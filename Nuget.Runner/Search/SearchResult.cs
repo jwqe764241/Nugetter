@@ -33,8 +33,7 @@ namespace Runner.Search
 		[JsonProperty("@base")]
 		public string Base { get; set; }
 	}
-
-    //검색된 패키지의 메타데이터
+    
     public class MetaData
 	{
 		[JsonProperty("@id")]
@@ -97,6 +96,4 @@ namespace Runner.Search
 		[JsonProperty("@id")]
 		public string Id { get; set; }
 	}
-
-	
 }
