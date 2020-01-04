@@ -10,16 +10,27 @@ namespace Runner.Indexer
 {
 	public class Indexer
 	{
-		private readonly string indexUrl;
+		private string indexUrl;
 
 		private List<Resource> resources;
 
 		public Indexer(string indexUrl)
 		{
-			this.indexUrl = indexUrl;
-			this.resources = new List<Resource>();
-			LoadResource();
+            SetIndexUrl(indexUrl);
 		}
+
+        public void SetIndexUrl(string indexUrl)
+        {
+            this.indexUrl = indexUrl;
+
+            if(this.resources != null)
+            {
+                this.resources.Clear();
+                this.resources.TrimExcess();
+            }
+
+            LoadResource();
+        }
 
 		private void LoadResource()
 		{
