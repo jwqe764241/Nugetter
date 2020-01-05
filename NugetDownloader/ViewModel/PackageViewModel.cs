@@ -250,7 +250,7 @@ namespace NugetDownloader.ViewModel
 		
 		private void LicenseClicked(object param)
 		{
-			
+            System.Diagnostics.Process.Start(SelectedItemManifest.LicenseUrl);
 		}
 
 		private void ListScrolled(object param)
