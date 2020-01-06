@@ -174,7 +174,7 @@
 
 						<Label FontSize="13" HorizontalAlignment="Left" Grid.Column="0" FontWeight="Bold" Content="Project URL:"/>
 						<TextBlock Style="{x:Null}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="2, 0 2, 0">
-							<Hyperlink NavigateUri="{Binding ProjectUrl}">
+							<Hyperlink Command="{Binding DataContext.GoToProjectCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
 								<AccessText TextWrapping="WrapWithOverflow" Text="{Binding ProjectUrl}"/>
 							</Hyperlink>
 						</TextBlock>

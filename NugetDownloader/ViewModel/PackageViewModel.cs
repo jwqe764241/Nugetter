@@ -75,6 +75,7 @@ namespace NugetDownloader.ViewModel
 		public ICommand SearchCommand { get; set; }
 		public ICommand InstallCommand { get; set; }
 
+        public ICommand GoToProjectCommand { get; set; }
         public PackageViewModel()
         {
             Indexer = new Indexer("https://api.nuget.org/v3/index.json");
@@ -86,6 +87,7 @@ namespace NugetDownloader.ViewModel
 			ListScrollCommand = new BaseCommand(ListScrolled);
 			SearchCommand = new BaseCommand(InputEnterDown);
 			InstallCommand = new BaseCommand(InstallClicked);
+            GoToProjectCommand = new BaseCommand(GoToProjectClicked);
 
 			SearchWorker = new BackgroundWorker
             {
@@ -252,6 +254,11 @@ namespace NugetDownloader.ViewModel
 		{
             System.Diagnostics.Process.Start(SelectedItemManifest.LicenseUrl);
 		}
+
+        private void GoToProjectClicked(object param)
+        {
+            System.Diagnostics.Process.Start(SelectedItemManifest.ProjectUrl);
+        }
 
 		private void ListScrolled(object param)
 		{
