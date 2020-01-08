@@ -182,7 +182,10 @@ namespace NugetDownloader.ViewModel
 		private void ManifestWorkCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			SelectedItemManifest = (ManifestResult)e.Result;
-			OnPropertyChanged("SelectedItemManifest");
+            SelectedVersion = SelectedItem.Versions.Last().Name;
+
+            OnPropertyChanged("SelectedVersion");
+            OnPropertyChanged("SelectedItemManifest");
 			OnPropertyChanged("SelectedItem");
 		}
 
