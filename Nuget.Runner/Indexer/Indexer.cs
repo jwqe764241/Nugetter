@@ -28,6 +28,10 @@ namespace Runner.Indexer
                 this.resources.Clear();
                 this.resources.TrimExcess();
             }
+            else
+            {
+                this.resources = new List<Resource>();
+            }
 
             LoadResource();
         }
