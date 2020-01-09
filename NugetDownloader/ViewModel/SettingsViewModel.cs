@@ -8,18 +8,24 @@ using System.Windows.Data;
 
 using NugetDownloader.Model;
 using NugetDownloader.Event;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace NugetDownloader.ViewModel
 {
     class SettingsViewModel : BaseViewModel
     {
-		private List<Source> defaultSources;
-        private List<Source> userDefinedSources;
+		private ObservableCollection<Source> defaultSources;
+        private ObservableCollection<Source> userDefinedSources;
 
-		public SettingsViewModel()
+        public ICommand AddDefinedSourceCommand { get; set; }
+
+        public SettingsViewModel()
 		{
-            defaultSources = new List<Source>();
-            userDefinedSources = new List<Source>();
+            defaultSources = new ObservableCollection<Source>();
+            userDefinedSources = new ObservableCollection<Source>();
+
+            AddDefinedSourceCommand = new BaseCommand(AddDefinedSourceClicked);
 
             //기본 패키지 소스
             AddDefaultSource(new Source { Name = "MyGet", Url = "https://www.myget.org/F/workflow/", Selected = true, Type = SourceType.Default });
@@ -40,11 +46,16 @@ namespace NugetDownloader.ViewModel
             defaultSources.Add(source);
             OnPropertyChanged("DefaultSources");
         }
-
+           
         public void AddDefinedSource(Source source)
         {
             userDefinedSources.Add(source);
             OnPropertyChanged("UserDefinedSources");
+        }
+
+        public void AddDefinedSourceClicked(object param)
+        {
+            AddDefinedSource((Source)param);
         }
     }
 }

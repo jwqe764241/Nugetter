@@ -82,6 +82,7 @@
     <Compile Include="Converter\AuthorConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\DependencyConverter.cs" />
+    <Compile Include="Converter\SourceConverter.cs" />
     <Compile Include="Converter\TagConverter.cs" />
     <Compile Include="Converter\VersionConverter.cs" />
     <Compile Include="Event\CommandAction.cs" />

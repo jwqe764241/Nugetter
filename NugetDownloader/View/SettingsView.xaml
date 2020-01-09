@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NugetDownloader.View"
+             xmlns:convert="clr-namespace:NugetDownloader.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="810">
 	<Grid>
@@ -36,7 +37,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox IsChecked="{Binding Selected}"/>
+                        <CheckBox Style="{x:Null}" IsChecked="{Binding Selected}"/>
                         <StackPanel Margin="30, 0, 0, 0">
                             <TextBlock Text="{Binding Name}" />
                             <TextBlock Text="{Binding Url}" />
@@ -48,9 +49,16 @@
 
         <Label FontSize="12" Margin="5,445,-5,-5" Foreground="Black">Name:</Label>
 		<Label FontSize="12" Margin="5,475,-5,-5" Foreground="Black">Source:</Label>
-		<TextBox Style="{x:Null}" HorizontalAlignment="Left" Height="23" Margin="60,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="660" BorderBrush="#FFB0B0B0"/>
-		<TextBox Style="{x:Null}" HorizontalAlignment="Left" Height="23" Margin="60,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="660" BorderBrush="#FFB0B0B0"/>
+		<TextBox Name="sourceName" Style="{x:Null}" HorizontalAlignment="Left" Height="23" Margin="60,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="660" BorderBrush="#FFB0B0B0"/>
+        <TextBox Name="sourceUrl" Style="{x:Null}" HorizontalAlignment="Left" Height="23" Margin="60,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="660" BorderBrush="#FFB0B0B0"/>
 
-		<Button Style="{x:Null}" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="725,481,0,0" Height="20" Background="#FFEBEBEB" BorderBrush="#FFB0B0B0"/>
-	</Grid>
+        <Button Style="{x:Null}" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="725,481,0,0" Height="20" Background="#FFEBEBEB" BorderBrush="#FFB0B0B0" Command="{Binding AddDefinedSourceCommand}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{convert:SourceConverter}">
+                    <Binding Path="Text" ElementName="sourceName"/>
+                    <Binding Path="Text" ElementName="sourceUrl"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </Grid>
 </UserControl>
