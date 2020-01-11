@@ -27,7 +27,6 @@ namespace NugetDownloader.ViewModel
 
             AddDefinedSourceCommand = new BaseCommand(AddDefinedSourceClicked);
 
-            //기본 패키지 소스
             AddDefaultSource(new Source { Name = "MyGet", Url = "https://www.myget.org/F/workflow/", Selected = true, Type = SourceType.Default });
             AddDefaultSource(new Source { Name = "NuGet", Url = "https://api.nuget.org/v2/index.json", Selected = true, Type = SourceType.Default });
         }

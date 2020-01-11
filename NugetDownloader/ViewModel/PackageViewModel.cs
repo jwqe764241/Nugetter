@@ -14,12 +14,6 @@ using Runner.Indexer;
 using Runner.Search;
 using Runner.Manifest;
 using Runner.Download;
-/*
-* 1. 한번에 붙여넣기 안됨?
-* 2. icon 없을경우 어케함?
-* 3. 버전은 맨 끝으로 위치하게 변경
-* 4. 스크롤 바닥에서 하면 20개 계속 추가
-*/
 
 namespace NugetDownloader.ViewModel
 {
@@ -216,7 +210,6 @@ namespace NugetDownloader.ViewModel
 			stream.Write(packageBinary, 0, packageBinary.Length);
 			stream.Close();
 
-			//nupkg 안에 lib 폴더만 압축해제
 			using (ZipArchive archive = ZipFile.OpenRead(packagePath))
 			{
 				var result = from currentEntry in archive.Entries
@@ -245,9 +238,6 @@ namespace NugetDownloader.ViewModel
 			MessageBox.Show("File : " + result.Id + "." + result.Version + ".nupkg download complete");
 		}
 
-		/*
-		 * 커맨드 이벤트
-		 */
 		private void ItemClicked(object param)
 		{
 			GetManifest();
