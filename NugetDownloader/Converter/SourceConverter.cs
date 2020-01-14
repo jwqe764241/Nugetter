@@ -17,7 +17,7 @@ namespace NugetDownloader.Converter
             string name = (string)values[0];
             string url = (string)values[1];
 
-            return new Source { Name = "ASxcasd", Url = "sadasd", Type = SourceType.Default };
+            return new Source { Name = name, Url = url, Type = SourceType.Default };
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
