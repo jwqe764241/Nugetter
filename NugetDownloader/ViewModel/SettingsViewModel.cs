@@ -8,6 +8,7 @@ using System.Windows.Data;
 
 using NugetDownloader.Model;
 using NugetDownloader.Event;
+using NugetDownloader.Global;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 
@@ -15,16 +16,10 @@ namespace NugetDownloader.ViewModel
 {
     class SettingsViewModel : BaseViewModel
     {
-		private ObservableCollection<Source> defaultSources;
-        private ObservableCollection<Source> userDefinedSources;
-
         public ICommand AddDefinedSourceCommand { get; set; }
 
         public SettingsViewModel()
 		{
-            defaultSources = new ObservableCollection<Source>();
-            userDefinedSources = new ObservableCollection<Source>();
-
             AddDefinedSourceCommand = new BaseCommand(AddDefinedSourceClicked);
 
             AddDefaultSource(new Source { Name = "MyGet", Url = "https://www.myget.org/F/workflow/", Type = SourceType.Default });
@@ -33,22 +28,22 @@ namespace NugetDownloader.ViewModel
 
 		public IEnumerable<Source> DefaultSources
 		{
-			get { return defaultSources; }
+			get { return ApiSettings.DefaultSources; }
 		}
         public IEnumerable<Source> UserDefinedSources
         {
-            get { return userDefinedSources; }
+            get { return ApiSettings.UserDefinedSources; }
         }
 
         public void AddDefaultSource(Source source)
         {
-            defaultSources.Add(source);
+            ApiSettings.AddDefaultSource(source);
             OnPropertyChanged("DefaultSources");
         }
            
         public void AddDefinedSource(Source source)
         {
-            userDefinedSources.Add(source);
+            ApiSettings.AddDefinedSource(source);
             OnPropertyChanged("UserDefinedSources");
         }
 
