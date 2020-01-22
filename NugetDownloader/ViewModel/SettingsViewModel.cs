@@ -22,8 +22,8 @@ namespace NugetDownloader.ViewModel
 		{
             AddDefinedSourceCommand = new BaseCommand(AddDefinedSourceClicked);
 
-            AddDefaultSource(new Source { Name = "MyGet", Url = "https://www.myget.org/F/workflow/", Type = SourceType.Default });
-            AddDefaultSource(new Source { Name = "NuGet", Url = "https://api.nuget.org/v2/index.json", Type = SourceType.Default });
+            AddDefaultSource(new Source { Name = "MyGet", Selected = true, Url = "https://www.myget.org/F/workflow/", Type = SourceType.Default });
+            AddDefaultSource(new Source { Name = "NuGet", Selected = false, Url = "https://api.nuget.org/v2/index.json", Type = SourceType.Default });
         }
 
 		public IEnumerable<Source> DefaultSources

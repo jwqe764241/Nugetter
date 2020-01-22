@@ -18,6 +18,8 @@ namespace NugetDownloader.Model
 
 		public string Name { get; set; }
 
-		public SourceType Type { get; set; }
+        public bool Selected { get; set; }
+
+        public SourceType Type { get; set; }
 	}
 }

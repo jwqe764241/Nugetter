@@ -18,7 +18,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton Style="{x:Null}" GroupName="select"/>
+                        <RadioButton Style="{x:Null}" GroupName="select" IsChecked="{Binding Selected}"/>
                         <StackPanel Margin="30, 0, 0, 0">
                             <TextBlock Text="{Binding Name}" />
                             <TextBlock Text="{Binding Url}" />
@@ -37,7 +37,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton Style="{x:Null}" GroupName="select"/>
+                        <RadioButton Style="{x:Null}" GroupName="select" IsChecked="{Binding Selected}"/>
                         <StackPanel Margin="30, 0, 0, 0">
                             <TextBlock Text="{Binding Name}" />
                             <TextBlock Text="{Binding Url}" />
