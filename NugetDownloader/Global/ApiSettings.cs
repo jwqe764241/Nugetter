@@ -13,6 +13,7 @@ namespace NugetDownloader.Global
     {
         private static ObservableCollection<Source> defaultSources = new ObservableCollection<Source>();
         private static ObservableCollection<Source> userDefinedSources = new ObservableCollection<Source>();
+        private static Source selectedSource = null;
 
         public static IEnumerable<Source> DefaultSources
         {
@@ -31,6 +32,16 @@ namespace NugetDownloader.Global
         public static void AddDefinedSource(Source source)
         {
             userDefinedSources.Add(source);
+        }
+
+        public static void SetSelectedSource(Source source)
+        {
+            selectedSource = source;
+        }
+
+        public static Source GetSelectedSource()
+        {
+            return selectedSource;
         }
     }
 }

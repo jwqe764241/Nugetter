@@ -17,13 +17,18 @@ namespace NugetDownloader.ViewModel
     class SettingsViewModel : BaseViewModel
     {
         public ICommand AddDefinedSourceCommand { get; set; }
+        public ICommand SelectSourceCommand { get; set; }
 
         public SettingsViewModel()
 		{
             AddDefinedSourceCommand = new BaseCommand(AddDefinedSourceClicked);
+            SelectSourceCommand = new BaseCommand(SelectSource);
 
-            AddDefaultSource(new Source { Name = "MyGet", Selected = true, Url = "https://www.myget.org/F/workflow/", Type = SourceType.Default });
-            AddDefaultSource(new Source { Name = "NuGet", Selected = false, Url = "https://api.nuget.org/v2/index.json", Type = SourceType.Default });
+            Source defaultSource = new Source { Name = "NuGet", Selected = true, Url = "https://api.nuget.org/v2/index.json", Type = SourceType.Default };
+            AddDefaultSource(defaultSource);
+            AddDefaultSource(new Source { Name = "MyGet", Selected = false, Url = "https://www.myget.org/F/workflow/", Type = SourceType.Default });
+
+            ApiSettings.SetSelectedSource(defaultSource);
         }
 
 		public IEnumerable<Source> DefaultSources
@@ -51,5 +56,11 @@ namespace NugetDownloader.ViewModel
         {
             AddDefinedSource((Source)param);
         }
+
+        public void SelectSource(object param)
+        {
+            ApiSettings.SetSelectedSource((Source)param);
+        }
+
     }
 }
