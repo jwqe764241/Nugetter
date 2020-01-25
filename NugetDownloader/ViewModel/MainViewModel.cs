@@ -10,19 +10,21 @@ namespace NugetDownloader.ViewModel
 		public ICommand SettingsCommand { get; set; }
 		public ICommand PackageCommand { get; set; }
 
-		private object selectedViewModel;
+		private BaseViewModel selectedViewModel;
 		public object SelectedViewModel
 		{
 			get { return selectedViewModel; }
 			set
 			{
-				selectedViewModel = value;
+                selectedViewModel.ViewClosed(null);
+				selectedViewModel = (BaseViewModel)value;
 				OnPropertyChanged("SelectedViewModel");
+                selectedViewModel.ViewOpened(null);
 			}
 		}
 
-		private SettingsViewModel _SettingsViewModel { get; set; }
-		private PackageViewModel _PackageViewModel { get; set; } 
+		private BaseViewModel _SettingsViewModel { get; set; }
+		private BaseViewModel _PackageViewModel { get; set; } 
 
 		public MainViewModel()
 		{
@@ -32,7 +34,8 @@ namespace NugetDownloader.ViewModel
 			_SettingsViewModel = new SettingsViewModel();
 			_PackageViewModel = new PackageViewModel();
 
-			SelectedViewModel = _SettingsViewModel;
+			selectedViewModel = _SettingsViewModel;
+            selectedViewModel.ViewOpened(null);
 		}
 
 		private void OpenSettings(object obj)
@@ -44,5 +47,13 @@ namespace NugetDownloader.ViewModel
 		{
 			SelectedViewModel = _PackageViewModel;
 		}
-	}
+
+        public override void ViewOpened(object param)
+        {
+        }
+
+        public override void ViewClosed(object param)
+        {
+        }
+    }
 }

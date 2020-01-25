@@ -9,6 +9,7 @@ using System.IO.Compression;
 
 using NugetDownloader.Event;
 using NugetDownloader.Model;
+using NugetDownloader.Global;
 
 using Runner.Indexer;
 using Runner.Search;
@@ -72,7 +73,6 @@ namespace NugetDownloader.ViewModel
         public ICommand GoToProjectCommand { get; set; }
         public PackageViewModel()
         {
-            Indexer = new Indexer("https://api.nuget.org/v3/index.json");
             searchList = new ObservableCollection<MetaData>();
 			searchKeyword = "";
 			
@@ -112,9 +112,18 @@ namespace NugetDownloader.ViewModel
 				q = searchKeyword,
 				take = 20
 			};
-
-			SearchWorker.RunWorkerAsync(SearchOption);
 		}
+
+        public override void ViewOpened(object param)
+        {
+            Indexer = new Indexer(ApiSettings.GetSelectedSource().Url);
+
+            SearchWorker.RunWorkerAsync(SearchOption);
+        }
+
+        public override void ViewClosed(object param)
+        {
+        }
 
         public void SearchPackage(Runner.Search.SearchOption option)
         {

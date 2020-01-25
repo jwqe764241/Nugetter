@@ -8,12 +8,15 @@ using System.ComponentModel;
 
 namespace NugetDownloader.ViewModel
 {
-	public class BaseViewModel : INotifyPropertyChanged
+	abstract public class BaseViewModel : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void OnPropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-	}
+
+        abstract public void ViewOpened(object param);
+        abstract public void ViewClosed(object param);
+    }
 }
