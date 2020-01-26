@@ -106,23 +106,24 @@ namespace NugetDownloader.ViewModel
 			};
 			DownloadWorker.DoWork += DownloadWork;
 			DownloadWorker.RunWorkerCompleted += DownloadWorkCompleted;
-
-			SearchOption = new Runner.Search.SearchOption()
-			{
-				q = searchKeyword,
-				take = 20
-			};
 		}
 
         public override void ViewOpened(object param)
         {
             Indexer = new Indexer(ApiSettings.GetSelectedSource().Url);
 
+            SearchOption = new Runner.Search.SearchOption()
+            {
+                q = searchKeyword,
+                take = 20
+            };
+
             SearchWorker.RunWorkerAsync(SearchOption);
         }
 
         public override void ViewClosed(object param)
         {
+            searchList.Clear();
         }
 
         public void SearchPackage(Runner.Search.SearchOption option)
