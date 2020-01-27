@@ -40,7 +40,15 @@ namespace Runner.Indexer
 		{
 			HttpClient httpClient = new HttpClient();
 			var responseString = httpClient.GetStringAsync(indexUrl).Result;
-			var index = JsonConvert.DeserializeObject<Index>(responseString);
+            Index index = null;
+            try
+            {
+                index = JsonConvert.DeserializeObject<Index>(responseString);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
 			resources.AddRange(index.Resources);
 		}

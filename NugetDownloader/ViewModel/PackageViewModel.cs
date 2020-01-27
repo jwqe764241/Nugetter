@@ -7,6 +7,8 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.IO.Compression;
 
+using Newtonsoft.Json;
+
 using NugetDownloader.Event;
 using NugetDownloader.Model;
 using NugetDownloader.Global;
@@ -15,6 +17,7 @@ using Runner.Indexer;
 using Runner.Search;
 using Runner.Manifest;
 using Runner.Download;
+using System;
 
 namespace NugetDownloader.ViewModel
 {
@@ -110,15 +113,26 @@ namespace NugetDownloader.ViewModel
 
         public override void ViewOpened(object param)
         {
-            Indexer = new Indexer(ApiSettings.GetSelectedSource().Url);
-
-            SearchOption = new Runner.Search.SearchOption()
+            try
             {
-                q = searchKeyword,
-                take = 20
-            };
+                Indexer = new Indexer(ApiSettings.GetSelectedSource().Url);
 
-            SearchWorker.RunWorkerAsync(SearchOption);
+                SearchOption = new Runner.Search.SearchOption()
+                {
+                    q = searchKeyword,
+                    take = 20
+                };
+
+                SearchWorker.RunWorkerAsync(SearchOption);
+            }
+            catch (JsonReaderException e)
+            {
+                MessageBox.Show("Can't read api list from selected server");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Unknown error in initialize indexer");
+            }
         }
 
         public override void ViewClosed(object param)
