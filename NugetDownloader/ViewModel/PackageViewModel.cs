@@ -127,11 +127,15 @@ namespace NugetDownloader.ViewModel
             }
             catch (JsonReaderException e)
             {
-                MessageBox.Show("Can't read api list from selected server");
+                MessageBox.Show("Can't read api list from selected server.");
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Invalid server url.");
             }
             catch (Exception e)
             {
-                MessageBox.Show("Unknown error in initialize indexer");
+                MessageBox.Show("Unknown error in initialize indexer.");
             }
         }
 
