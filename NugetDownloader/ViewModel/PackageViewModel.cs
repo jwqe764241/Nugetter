@@ -76,17 +76,14 @@ namespace NugetDownloader.ViewModel
         public ICommand GoToProjectCommand { get; set; }
         public PackageViewModel()
         {
-            searchList = new ObservableCollection<MetaData>();
-			searchKeyword = "";
-			
-			ItemClickCommand = new BaseCommand(ItemClicked);
+            ItemClickCommand = new BaseCommand(ItemClicked);
 			ShowLicenseCommand = new BaseCommand(LicenseClicked);
 			ListScrollCommand = new BaseCommand(ListScrolled);
 			SearchCommand = new BaseCommand(InputEnterDown);
 			InstallCommand = new BaseCommand(InstallClicked);
             GoToProjectCommand = new BaseCommand(GoToProjectClicked);
 
-			SearchWorker = new BackgroundWorker
+            SearchWorker = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
@@ -115,13 +112,16 @@ namespace NugetDownloader.ViewModel
         {
             try
             {
-                Indexer = new Indexer(ApiSettings.GetSelectedSource().Url);
+                searchList = new ObservableCollection<MetaData>();
 
+                searchKeyword = "";
                 SearchOption = new Runner.Search.SearchOption()
                 {
                     q = searchKeyword,
                     take = 20
                 };
+
+                Indexer = new Indexer(ApiSettings.GetSelectedSource().Url);
 
                 SearchWorker.RunWorkerAsync(SearchOption);
             }
@@ -153,10 +153,17 @@ namespace NugetDownloader.ViewModel
         }
         private void SearchWork(object sender, DoWorkEventArgs e)
         {
-			Runner.Search.SearchOption options = (Runner.Search.SearchOption)e.Argument;
-				
-			var result = Search.Run(Indexer.GetResource(Search.RequiredType).First().Id, options);
-            e.Result = result;
+            if(Indexer != null)
+            {
+                Runner.Search.SearchOption options = (Runner.Search.SearchOption)e.Argument;
+
+                var result = Search.Run(Indexer.GetResource(Search.RequiredType).First().Id, options);
+                e.Result = result;
+            }
+            else
+            {
+                e.Result = null;
+            }
         }
         private void SearchWorkCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -171,13 +178,16 @@ namespace NugetDownloader.ViewModel
             else
             {
                 var result = (SearchResult)e.Result;
-                
-                foreach(var item in result.Data)
-				{
-					SearchList.Add(item);
-				}
 
-                OnPropertyChanged("SearchList");
+                if (result != null)
+                {
+                    foreach (var item in result.Data)
+                    {
+                        SearchList.Add(item);
+                    }
+
+                    OnPropertyChanged("SearchList");
+                }
             }
         }
 
@@ -299,7 +309,23 @@ namespace NugetDownloader.ViewModel
 			SearchList.Clear();
 			 
 			SearchOption.q = SearchKeyword;
-			SearchPackage(SearchOption);
+
+            try
+            {
+                SearchPackage(SearchOption);
+            }
+            catch (JsonReaderException e)
+            {
+                MessageBox.Show("Can't read api list from selected server.");
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Invalid server url.");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Unknown error in initialize indexer.");
+            }
 		}
 
 		private void InstallClicked(object param)
